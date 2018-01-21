@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:AvtoNetNotifier"
+             x:Class="AvtoNetNotifier.MainPage">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="buttonDefault" TargetType="Button">
+                <Setter Property="BorderRadius" Value="10"></Setter>
+                <Setter Property="FontSize" Value="Medium"></Setter>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Text="Ponastavi" BackgroundColor="Transparent" TextColor="RoyalBlue" Style="{StaticResource buttonDefault}"></Button>
+                <Button Text="Posodobi" BackgroundColor="RoyalBlue" TextColor="White" Style="{StaticResource buttonDefault}"></Button>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
