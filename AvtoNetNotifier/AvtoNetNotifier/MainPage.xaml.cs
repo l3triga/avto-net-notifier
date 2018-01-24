@@ -11,7 +11,7 @@ namespace AvtoNetNotifier
 	{
         public const string SOURCE_URL = "https://www.avto.net/Ads/search.asp?SID=10000";
 
-        private WebParser parser;
+        private AvtoNetParser parser;
 
 		public MainPage()
 		{
@@ -26,11 +26,11 @@ namespace AvtoNetNotifier
 
         public async Task ParseAvtoNetSource()
         {
-            parser = new WebParser();
-            bool status = await parser.LoadSourceAsync(SOURCE_URL);
+            parser = new AvtoNetParser();
+            bool status = await parser.LoadSourceAsync(AvtoNetParser.SOURCE_URL);
             if (status)
             {
-                parser.Parse();
+                parser.ParseBrands();
             }
         }
 	}

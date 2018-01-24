@@ -8,7 +8,7 @@ namespace AvtoNetNotifier
 {
     class WebParser
     {
-        HtmlDocument document;
+        protected HtmlDocument document;
 
         public async Task<bool> LoadSourceAsync(string URL)
         {
@@ -16,10 +16,6 @@ namespace AvtoNetNotifier
             document = await webHTML.LoadFromWebAsync(URL);
 
             return !String.IsNullOrEmpty(document.ParsedText);
-        }
-
-        public void Parse()
-        {
         }
     }
 }

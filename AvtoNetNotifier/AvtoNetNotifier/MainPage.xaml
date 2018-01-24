@@ -6,19 +6,38 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style x:Key="buttonDefault" TargetType="Button">
-                <Setter Property="BorderRadius" Value="10"></Setter>
-                <Setter Property="FontSize" Value="Medium"></Setter>
-            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical">
-            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
-                <Button Text="Ponastavi" BackgroundColor="Transparent" TextColor="RoyalBlue" Style="{StaticResource buttonDefault}"></Button>
-                <Button Text="Posodobi" BackgroundColor="RoyalBlue" TextColor="White" Style="{StaticResource buttonDefault}"></Button>
-            </StackLayout>
-        </StackLayout>
+        <ScrollView Margin="20">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <Label Text="Starost" FontSize="Medium" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"></Label>
+                <Label Text="Novo" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
+                <Switch ClassId="star1" HorizontalOptions="StartAndExpand" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"></Switch>
+                <Label Text="Testno" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" />
+                <Switch ClassId="star2" HorizontalOptions="StartAndExpand" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"></Switch>
+                <Label Text="Rabljeno" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"/>
+                <Switch ClassId="star4" HorizontalOptions="StartAndExpand" Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"></Switch>
+
+                <Button Text="Ponastavi" HorizontalOptions="EndAndExpand" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"></Button>
+                <Button Text="Posodobi" HorizontalOptions="StartAndExpand" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3"></Button>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
