@@ -8,14 +8,18 @@
         <ResourceDictionary>
         </ResourceDictionary>
     </ContentPage.Resources>
-
     <ContentPage.Content>
         <ScrollView Margin="20">
             <Grid>
                 <Grid.RowDefinitions>
+                    <!-- Starost -->
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <!-- Znamka, model -->
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <!-- Gumbi -->
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -26,7 +30,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-
+                <!-- Starost -->
                 <Label Text="Starost" FontSize="Medium" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"></Label>
                 <Label Text="Novo" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
                 <Switch ClassId="star1" HorizontalOptions="StartAndExpand" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"></Switch>
@@ -34,9 +38,13 @@
                 <Switch ClassId="star2" HorizontalOptions="StartAndExpand" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"></Switch>
                 <Label Text="Rabljeno" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"/>
                 <Switch ClassId="star4" HorizontalOptions="StartAndExpand" Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"></Switch>
-
-                <Button Text="Ponastavi" HorizontalOptions="EndAndExpand" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"></Button>
-                <Button Text="Posodobi" HorizontalOptions="StartAndExpand" Grid.Row="3" Grid.Column="3" Grid.ColumnSpan="3"></Button>
+                <!-- Znamka, model -->
+                <Label Text="Znamka in model" FontSize="Medium" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6"></Label>
+                <Picker Title="Znamka" ItemsSource="{Binding Brands}" ItemDisplayBinding="{Binding Brand}" SelectedItem="{Binding SelectedBrand}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"></Picker>
+                <Picker Title="Model" ItemsSource="{Binding Models}" ItemDisplayBinding="{Binding Model}" SelectedItem="{Binding SelectedModel}" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="3"></Picker>
+                <!-- Gumbi -->
+                <Button Text="Ponastavi" HorizontalOptions="EndAndExpand" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"></Button>
+                <Button Text="Posodobi" HorizontalOptions="StartAndExpand" Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="3"></Button>
             </Grid>
         </ScrollView>
     </ContentPage.Content>

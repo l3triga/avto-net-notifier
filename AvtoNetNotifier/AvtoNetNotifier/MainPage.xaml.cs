@@ -11,12 +11,15 @@ namespace AvtoNetNotifier
 	{
         public const string SOURCE_URL = "https://www.avto.net/Ads/search.asp?SID=10000";
 
-        private AvtoNetParser parser;
+        private AvtoNetParser Parser;
 
 		public MainPage()
 		{
 			InitializeComponent();
-		}
+            Parser = new AvtoNetParser();
+
+            BindingContext = Parser.CarConfigurator;
+        }
 
         protected override async void OnAppearing()
         {
@@ -26,11 +29,12 @@ namespace AvtoNetNotifier
 
         public async Task ParseAvtoNetSource()
         {
-            parser = new AvtoNetParser();
-            bool status = await parser.LoadSourceAsync(AvtoNetParser.SOURCE_URL);
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            bool status = await Parser.LoadSourceAsync(AvtoNetParser.SOURCE_URL, Encoding.GetEncoding(1252));
             if (status)
             {
-                parser.ParseBrands();
+                Parser.Parse();
             }
         }
 	}
