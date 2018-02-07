@@ -19,6 +19,9 @@
                     <!-- Znamka, model -->
                     <RowDefinition Height="Auto"></RowDefinition>
                     <RowDefinition Height="Auto"></RowDefinition>
+                    <!-- Cena, letnik, prevoženi km -->
+                    <RowDefinition Height="Auto"></RowDefinition>
+                    <RowDefinition Height="Auto"></RowDefinition>
                     <!-- Gumbi -->
                     <RowDefinition Height="Auto"></RowDefinition>
                 </Grid.RowDefinitions>
@@ -33,18 +36,21 @@
                 <!-- Starost -->
                 <Label Text="Starost" FontSize="Medium" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"></Label>
                 <Label Text="Novo" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
-                <Switch ClassId="star1" HorizontalOptions="StartAndExpand" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"></Switch>
+                <Switch IsToggled="{Binding New}" HorizontalOptions="StartAndExpand" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"></Switch>
                 <Label Text="Testno" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" />
-                <Switch ClassId="star2" HorizontalOptions="StartAndExpand" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"></Switch>
+                <Switch IsToggled="{Binding Test}" HorizontalOptions="StartAndExpand" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"></Switch>
                 <Label Text="Rabljeno" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"/>
-                <Switch ClassId="star4" HorizontalOptions="StartAndExpand" Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"></Switch>
+                <Switch IsToggled="{Binding Used}" HorizontalOptions="StartAndExpand" Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"></Switch>
                 <!-- Znamka, model -->
                 <Label Text="Znamka in model" FontSize="Medium" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6"></Label>
-                <Picker Title="Znamka" ItemsSource="{Binding Brands}" ItemDisplayBinding="{Binding Brand}" SelectedItem="{Binding SelectedBrand}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"></Picker>
+                <Picker Title="Znamka" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding Brands}" ItemDisplayBinding="{Binding Brand}" SelectedItem="{Binding SelectedBrand}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"></Picker>
                 <Picker Title="Model" ItemsSource="{Binding Models}" ItemDisplayBinding="{Binding Model}" SelectedItem="{Binding SelectedModel}" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="3"></Picker>
+                <!-- Cena, letnik, prevoženi km -->
+                <Label Text="Cena, letnik, prevoženi km" FontSize="Medium" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="6"></Label>
+                <Picker Title="Cena od" ItemsSource="{Binding Prices}" ItemDisplayBinding="{Binding Value}" SelectedItem="{Binding MinPrice}" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3"></Picker>
+                <Picker Title="Cena do" ItemsSource="{Binding Prices}" ItemDisplayBinding="{Binding Value}" SelectedItem="{Binding MaxPrice}" Grid.Row="6" Grid.Column="3" Grid.ColumnSpan="3"></Picker>
                 <!-- Gumbi -->
-                <Button Text="Ponastavi" HorizontalOptions="EndAndExpand" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"></Button>
-                <Button Text="Posodobi" HorizontalOptions="StartAndExpand" Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="3"></Button>
+                <Button Text="Ponastavi" HorizontalOptions="CenterAndExpand" Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="6"></Button>
             </Grid>
         </ScrollView>
     </ContentPage.Content>

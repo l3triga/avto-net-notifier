@@ -4,10 +4,16 @@ using System.Text;
 
 namespace AvtoNetNotifier
 {
-    class CarBrand
+    public class CarBrand : IEquatable<CarBrand>
     {
         public string Brand { get; set; }
         public List<CarModel> Models { get; set; }
+
+        public CarBrand()
+        {
+            Brand = "";
+            Models = new List<CarModel>();
+        }
 
         public CarBrand (string brand)
         {
@@ -19,6 +25,11 @@ namespace AvtoNetNotifier
         {
             Brand = brand;
             Models = new List<CarModel>();
+        }
+
+        public bool Equals(CarBrand other)
+        {
+            return this.Brand.Equals(other.Brand);
         }
 
         public class EqualityComparer : IEqualityComparer<CarBrand>

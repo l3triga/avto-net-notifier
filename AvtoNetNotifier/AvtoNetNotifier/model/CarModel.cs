@@ -4,13 +4,18 @@ using System.Text;
 
 namespace AvtoNetNotifier
 {
-    class CarModel
+    public class CarModel
     {
         public string Model { get; set; }
 
+        public CarModel()
+        {
+            Model = "";
+        }
+
         public CarModel(string model)
         {
-            this.Model = model;
+            Model = model;
         }
     }
 }
