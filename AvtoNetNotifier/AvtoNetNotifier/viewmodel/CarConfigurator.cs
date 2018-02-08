@@ -54,7 +54,7 @@ namespace AvtoNetNotifier
             }
         }
 
-        public ObservableCollection<CarBrand> Brands { get; set; }
+        public MyObservableCollection<CarBrand> Brands { get; set; }
         /*private CarBrand _selectedBrand;
         public CarBrand SelectedBrand {
             get {
@@ -78,7 +78,10 @@ namespace AvtoNetNotifier
                 var brand = ObjectSerializer.Deserialize<CarBrand>(
                     AppSettings.GetValueOrDefault(nameof(SelectedBrand), null)
                 );
-                return Brands[Brands.IndexOf(brand)];
+
+                CarBrand refBrand;
+                Brands.TryGetValue(brand, out refBrand);
+                return refBrand;
             }
             set
             {
@@ -88,16 +91,19 @@ namespace AvtoNetNotifier
                         ObjectSerializer.Serialize<CarBrand>(value)
                     );
                     OnPropertyChanged("SelectedBrand");
-                    this.Models = new ObservableCollection<CarModel>(value.Models ?? null);
-                    OnPropertyChanged("Models");
+                    if (value.Models != null)
+                    {
+                        Models = new MyObservableCollection<CarModel>(value.Models);
+                        OnPropertyChanged("Models");
+                    }
                 }
             }
         }
 
-        public ObservableCollection<CarModel> Models { get; set; }
+        public MyObservableCollection<CarModel> Models { get; set; }
         public CarModel SelectedModel { get; set; }
 
-        public ObservableCollection<CarPrice> Prices { get; set; }
+        public MyObservableCollection<CarPrice> Prices { get; set; }
         public CarPrice MinPrice { get; set; }
         public CarPrice MaxPrice { get; set; }
 
@@ -105,9 +111,9 @@ namespace AvtoNetNotifier
         {
             IsInitialized = false;
 
-            Brands = new ObservableCollection<CarBrand>();
-            Models = new ObservableCollection<CarModel>();
-            Prices = new ObservableCollection<CarPrice>();
+            Brands = new MyObservableCollection<CarBrand>();
+            Models = new MyObservableCollection<CarModel>();
+            Prices = new MyObservableCollection<CarPrice>();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
