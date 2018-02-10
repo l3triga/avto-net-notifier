@@ -6,46 +6,84 @@
 
     <ContentPage.Resources>
         <ResourceDictionary>
+            <local:InverseBooleanConverter x:Key="inverseBool" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <ScrollView Margin="20">
-            <Grid>
-                <Grid.RowDefinitions>
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+            <ScrollView Margin="20" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <!-- Starost -->
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <!-- Znamka, model -->
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <!-- Cena, letnik, prevoženi km -->
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
                     <!-- Starost -->
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
+                    <Label Text="Starost" FontSize="Medium" Grid.Row="0" Grid.Column="0" 
+                       Grid.ColumnSpan="6"></Label>
+                    <Label Text="Novo" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
+                    <Switch IsToggled="{Binding New}" HorizontalOptions="StartAndExpand" Grid.Row="2" 
+                        Grid.Column="0" Grid.ColumnSpan="2"></Switch>
+                    <Label Text="Testno" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" />
+                    <Switch IsToggled="{Binding Test}" HorizontalOptions="StartAndExpand" Grid.Row="2" 
+                        Grid.Column="2" Grid.ColumnSpan="2"></Switch>
+                    <Label Text="Rabljeno" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"/>
+                    <Switch IsToggled="{Binding Used}" HorizontalOptions="StartAndExpand" Grid.Row="2" 
+                        Grid.Column="4" Grid.ColumnSpan="2"></Switch>
                     <!-- Znamka, model -->
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <RowDefinition Height="Auto"></RowDefinition>
-                    <!-- Gumbi -->
-                    <RowDefinition Height="Auto"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <!-- Starost -->
-                <Label Text="Starost" FontSize="Medium" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="6"></Label>
-                <Label Text="Novo" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" />
-                <Switch ClassId="star1" HorizontalOptions="StartAndExpand" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"></Switch>
-                <Label Text="Testno" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" />
-                <Switch ClassId="star2" HorizontalOptions="StartAndExpand" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2"></Switch>
-                <Label Text="Rabljeno" Grid.Row="1" Grid.Column="4" Grid.ColumnSpan="2"/>
-                <Switch ClassId="star4" HorizontalOptions="StartAndExpand" Grid.Row="2" Grid.Column="4" Grid.ColumnSpan="2"></Switch>
-                <!-- Znamka, model -->
-                <Label Text="Znamka in model" FontSize="Medium" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="6"></Label>
-                <Picker Title="Znamka" ItemsSource="{Binding Brands}" ItemDisplayBinding="{Binding Brand}" SelectedItem="{Binding SelectedBrand}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"></Picker>
-                <Picker Title="Model" ItemsSource="{Binding Models}" ItemDisplayBinding="{Binding Model}" SelectedItem="{Binding SelectedModel}" Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="3"></Picker>
-                <!-- Gumbi -->
-                <Button Text="Ponastavi" HorizontalOptions="EndAndExpand" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"></Button>
-                <Button Text="Posodobi" HorizontalOptions="StartAndExpand" Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="3"></Button>
-            </Grid>
-        </ScrollView>
+                    <Label Text="Znamka in model" FontSize="Medium" Grid.Row="3" Grid.Column="0" 
+                       Grid.ColumnSpan="6"></Label>
+                    <Picker Title="Znamka" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding Brands}" 
+                        ItemDisplayBinding="{Binding Brand}" SelectedItem="{Binding SelectedBrand}" 
+                        Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"></Picker>
+                    <Picker Title="Model" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding Models}" 
+                        ItemDisplayBinding="{Binding Model}" SelectedItem="{Binding SelectedModel}" 
+                        Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="3"></Picker>
+                    <!-- Cena, letnik, prevoženi km -->
+                    <Label Text="Cena, letnik, prevoženi km" FontSize="Medium" Grid.Row="5" Grid.Column="0" 
+                       Grid.ColumnSpan="6"></Label>
+                    <Picker Title="Cena od" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding Prices}" 
+                        ItemDisplayBinding="{Binding Value}" SelectedItem="{Binding MinPrice}" Grid.Row="6" 
+                        Grid.Column="0" Grid.ColumnSpan="3"></Picker>
+                    <Picker Title="Cena do" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding Prices}" 
+                        ItemDisplayBinding="{Binding Value}" SelectedItem="{Binding MaxPrice}" Grid.Row="6" 
+                        Grid.Column="3" Grid.ColumnSpan="3"></Picker>
+                    <Picker Title="Letnik od" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding Ages}" 
+                        ItemDisplayBinding="{Binding Age}" SelectedItem="{Binding MinAge}" Grid.Row="7" 
+                        Grid.Column="0" Grid.ColumnSpan="3"></Picker>
+                    <Picker Title="Letnik do" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding Ages}" 
+                        ItemDisplayBinding="{Binding Age}" SelectedItem="{Binding MaxAge}" Grid.Row="7" 
+                        Grid.Column="3" Grid.ColumnSpan="3"></Picker>
+                </Grid>
+            </ScrollView>
+            <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                            AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
+                        IsVisible="{Binding Path=IsInitialized, Converter={StaticResource inverseBool}}" 
+                            BackgroundColor="Black" Opacity="0.75">
+                <ActivityIndicator IsRunning="{Binding Path=IsInitialized, Converter={StaticResource inverseBool}}" 
+                                   IsVisible="{Binding Path=IsInitialized, Converter={StaticResource inverseBool}}" 
+                                   Color="White" VerticalOptions="CenterAndExpand" 
+                               HorizontalOptions="CenterAndExpand" 
+                                   AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
+                               HeightRequest="20" WidthRequest="50" />
+            </AbsoluteLayout>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
