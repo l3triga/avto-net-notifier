@@ -21,6 +21,10 @@ namespace AvtoNetNotifier
                 _isInitialized = value;
                 OnPropertyChanged("IsInitialized");
                 OnPropertyChanged("SelectedBrand");
+                OnPropertyChanged("MinPrice");
+                OnPropertyChanged("MaxPrice");
+                OnPropertyChanged("MinAge");
+                OnPropertyChanged("MaxAge");
             }
         }
 
@@ -55,33 +59,12 @@ namespace AvtoNetNotifier
         }
 
         public MyObservableCollection<CarBrand> Brands { get; set; }
-        /*private CarBrand _selectedBrand;
-        public CarBrand SelectedBrand {
-            get {
-                return _selectedBrand;
-            }
-            set {
-                _selectedBrand = value;
-                OnPropertyChanged("SelectedBrand");
-                this.Models = new ObservableCollection<CarModel>(_selectedBrand.Models);
-                OnPropertyChanged("Models");
-            }
-        }*/
 
         public CarBrand SelectedBrand
         {
             get
             {
-                if (!IsInitialized)
-                    return null;
-
-                var brand = ObjectSerializer.Deserialize<CarBrand>(
-                    AppSettings.GetValueOrDefault(nameof(SelectedBrand), null)
-                );
-
-                CarBrand refBrand;
-                Brands.TryGetValue(brand, out refBrand);
-                return refBrand;
+                return AppSetttingsSerializedDefaultGet<CarBrand>(nameof(SelectedBrand), Brands);
             }
             set
             {
@@ -95,17 +78,71 @@ namespace AvtoNetNotifier
                     {
                         Models = new MyObservableCollection<CarModel>(value.Models);
                         OnPropertyChanged("Models");
+                        OnPropertyChanged("SelectedModel");
                     }
                 }
             }
         }
 
         public MyObservableCollection<CarModel> Models { get; set; }
-        public CarModel SelectedModel { get; set; }
+        public CarModel SelectedModel {
+            get
+            {
+                return AppSetttingsSerializedDefaultGet<CarModel>(nameof(SelectedModel), Models);
+            }
+            set
+            {
+                AppSetingsSerializedDefaultSet<CarModel>(nameof(SelectedModel), value);
+            }
+        }
 
         public MyObservableCollection<CarPrice> Prices { get; set; }
-        public CarPrice MinPrice { get; set; }
-        public CarPrice MaxPrice { get; set; }
+        public CarPrice MinPrice
+        {
+            get
+            {
+                return AppSetttingsSerializedDefaultGet<CarPrice>(nameof(MinPrice), Prices);
+            }
+            set
+            {
+                AppSetingsSerializedDefaultSet<CarPrice>(nameof(MinPrice), value);
+            }
+        }
+        public CarPrice MaxPrice
+        {
+            get
+            {
+                return AppSetttingsSerializedDefaultGet<CarPrice>(nameof(MaxPrice), Prices);
+            }
+            set
+            {
+                AppSetingsSerializedDefaultSet<CarPrice>(nameof(MaxPrice), value);
+            }
+        }
+
+        public MyObservableCollection<CarAge> Ages { get; set; }
+        public CarAge MinAge
+        {
+            get
+            {
+                return AppSetttingsSerializedDefaultGet<CarAge>(nameof(MinAge), Ages);
+            }
+            set
+            {
+                AppSetingsSerializedDefaultSet<CarAge>(nameof(MinAge), value);
+            }
+        }
+        public CarAge MaxAge
+        {
+            get
+            {
+                return AppSetttingsSerializedDefaultGet<CarAge>(nameof(MaxAge), Ages);
+            }
+            set
+            {
+                AppSetingsSerializedDefaultSet<CarAge>(nameof(MaxAge), value);
+            }
+        }
 
         public CarConfigurator()
         {
@@ -114,6 +151,31 @@ namespace AvtoNetNotifier
             Brands = new MyObservableCollection<CarBrand>();
             Models = new MyObservableCollection<CarModel>();
             Prices = new MyObservableCollection<CarPrice>();
+            Ages = new MyObservableCollection<CarAge>();
+        }
+
+        private T AppSetttingsSerializedDefaultGet<T>(string property, MyObservableCollection<T> collection)
+        {
+            if (!IsInitialized)
+                return default(T);
+
+            var obj = ObjectSerializer.Deserialize<T>(
+                AppSettings.GetValueOrDefault(property, null)
+            );
+
+            collection.TryGetValue(obj, out T refObj);
+            return refObj;
+        }
+
+        private void AppSetingsSerializedDefaultSet<T>(string property, T value)
+        {
+            if (IsInitialized)
+            {
+                AppSettings.AddOrUpdateValue(property,
+                    ObjectSerializer.Serialize<T>(value)
+                );
+                OnPropertyChanged(property);
+            }
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

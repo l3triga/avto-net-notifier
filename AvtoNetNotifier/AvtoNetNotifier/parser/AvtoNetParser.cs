@@ -10,7 +10,6 @@ namespace AvtoNetNotifier
         public static readonly string SOURCE_URL = "https://www.avto.net/Ads/search.asp?SID=10000";
 
         public CarConfigurator CarConfigurator { get; }
-        public bool SkipDefaultOption { get; set; }
 
         public AvtoNetParser()
         {
@@ -21,6 +20,7 @@ namespace AvtoNetNotifier
         {
             ParseBrandsAndModels();
             ParsePrices();
+            ParseAges();
 
             CarConfigurator.IsInitialized = true;
         }
@@ -87,6 +87,29 @@ namespace AvtoNetNotifier
                     var priceValue = node.Attributes["value"].Value;
                     CarPrice price = new CarPrice(Convert.ToUInt32(priceValue));
                     CarConfigurator.Prices.Add(price);
+                }
+            }
+        }
+
+        public void ParseAges()
+        {
+            HtmlNodeCollection nodes = GetSelectNodeByName("letnikMin");
+
+            bool isDefaultOption = true;
+
+            foreach (var node in nodes)
+            {
+                if (node.NodeType == HtmlNodeType.Element)
+                {
+                    if (isDefaultOption)
+                    {
+                        isDefaultOption = false;
+                        continue;
+                    }
+
+                    var ageValue = node.Attributes["value"].Value;
+                    CarAge age = new CarAge(Convert.ToUInt32(ageValue));
+                    CarConfigurator.Ages.Add(age);
                 }
             }
         }

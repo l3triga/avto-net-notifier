@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AvtoNetNotifier
 {
-    public class CarPrice
+    public class CarPrice : IEquatable<CarPrice>
     {
         public uint Price { get; set; }
         public string Currency { get; set; }
@@ -32,6 +32,11 @@ namespace AvtoNetNotifier
         {
             Price = price;
             Currency = currency;
+        }
+
+        public bool Equals(CarPrice other)
+        {
+            return this.Value.Equals(other.Value);
         }
 
         public override string ToString()

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace AvtoNetNotifier
 {
-    public class CarModel
+    public class CarModel : IEquatable<CarModel>
     {
         public string Model { get; set; }
 
@@ -16,6 +16,11 @@ namespace AvtoNetNotifier
         public CarModel(string model)
         {
             Model = model;
+        }
+
+        public bool Equals(CarModel other)
+        {
+            return this.Model.Equals(other.Model);
         }
     }
 }
