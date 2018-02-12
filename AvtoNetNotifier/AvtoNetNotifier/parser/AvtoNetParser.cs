@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using HtmlAgilityPack;
+using System.Linq;
 
 namespace AvtoNetNotifier
 {
@@ -27,27 +28,33 @@ namespace AvtoNetNotifier
 
         public void ParseBrandsAndModels()
         {
-            Dictionary<CarBrand, List<CarModel>> dictionary = 
-                new Dictionary<CarBrand, List<CarModel>>(new CarBrand.EqualityComparer());
+            Dictionary<CarBrand, List<CarAttribute<string>>> dictionary = 
+                new Dictionary<CarBrand, List<CarAttribute<string>>>(new CarBrand.EqualityComparer());
 
-            bool isDefaultOption = true;
+            HtmlNode defaultBrandNode = document.DocumentNode.
+                SelectSingleNode("//select[@name='znamka']/option[@value='']");
+            CarBrand defaultBrand = new CarBrand(defaultBrandNode.Attributes["value"].Value, 
+                defaultBrandNode.InnerText);
+
+            CarAttribute<string> defaultModel = null;
 
             HtmlNodeCollection nodes = GetSelectNodeByName("model");
             foreach (var node in nodes)
             {
                 if (node.NodeType == HtmlNodeType.Element)
                 {
-                    if (isDefaultOption)
+                    if (defaultModel == null)
                     {
-                        isDefaultOption = false;
+                        defaultModel = new CarAttribute<string>(node.Attributes["value"].Value, node.InnerText);
+                        dictionary.Add(defaultBrand, new List<CarAttribute<string>> { defaultModel });
                         continue;
                     }
 
                     var modelValue = node.Attributes["value"].Value;
-                    var brandValue = node.Attributes["class"] != null ? node.Attributes["class"].Value : "";
+                    var brandValue = node.Attributes["class"].Value;
 
                     CarBrand brand = new CarBrand(brandValue);
-                    CarModel model = new CarModel(modelValue);
+                    CarAttribute<string> model = new CarAttribute<string>(modelValue, modelValue);
 
                     if (dictionary.ContainsKey(brand))
                     {
@@ -55,7 +62,7 @@ namespace AvtoNetNotifier
                     }
                     else
                     {
-                        dictionary.Add(brand, new List<CarModel> { model });
+                        dictionary.Add(brand, new List<CarAttribute<string>> { defaultModel, model });
                     }
                 }
             }
@@ -70,48 +77,37 @@ namespace AvtoNetNotifier
 
         public void ParsePrices()
         {
-            HtmlNodeCollection nodes = GetSelectNodeByName("cenaMin");
+            HtmlNodeCollection nodesMin = GetSelectNodeByName("cenaMin");
+            CarConfigurator.MinPrices.AddRange(ParseGenericAttribute<uint>(nodesMin));
 
-            bool isDefaultOption = true;
-
-            foreach (var node in nodes)
-            {
-                if (node.NodeType == HtmlNodeType.Element)
-                {
-                    if (isDefaultOption)
-                    {
-                        isDefaultOption = false;
-                        continue;
-                    }
-
-                    var priceValue = node.Attributes["value"].Value;
-                    CarPrice price = new CarPrice(Convert.ToUInt32(priceValue));
-                    CarConfigurator.Prices.Add(price);
-                }
-            }
+            HtmlNodeCollection nodesMax = GetSelectNodeByName("cenaMax");
+            CarConfigurator.MaxPrices.AddRange(ParseGenericAttribute<uint>(nodesMax));
         }
 
         public void ParseAges()
         {
-            HtmlNodeCollection nodes = GetSelectNodeByName("letnikMin");
+            HtmlNodeCollection nodesMin = GetSelectNodeByName("letnikMin");
+            CarConfigurator.MinAges.AddRange(ParseGenericAttribute<uint>(nodesMin));
 
-            bool isDefaultOption = true;
+            HtmlNodeCollection nodesMax = GetSelectNodeByName("letnikMax");
+            CarConfigurator.MaxAges.AddRange(ParseGenericAttribute<uint>(nodesMax));
+        }
 
+        private List<CarAttribute<T>> ParseGenericAttribute<T>(HtmlNodeCollection nodes) where T : new()
+        {
+            List<CarAttribute<T>> collection = new List<CarAttribute<T>>();
             foreach (var node in nodes)
             {
                 if (node.NodeType == HtmlNodeType.Element)
                 {
-                    if (isDefaultOption)
-                    {
-                        isDefaultOption = false;
-                        continue;
-                    }
+                    var value = node.Attributes["value"].Value;
+                    var text = node.InnerText;
 
-                    var ageValue = node.Attributes["value"].Value;
-                    CarAge age = new CarAge(Convert.ToUInt32(ageValue));
-                    CarConfigurator.Ages.Add(age);
+                    CarAttribute<T> attribute = new CarAttribute<T>((T)Convert.ChangeType(value, typeof(T)), text);
+                    collection.Add(attribute);
                 }
             }
+            return collection;
         }
 
         private HtmlNodeCollection GetSelectNodeByName(string name)

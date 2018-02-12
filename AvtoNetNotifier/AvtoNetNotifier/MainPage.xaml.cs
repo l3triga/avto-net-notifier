@@ -2,6 +2,8 @@
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Plugin.Settings;
+using Plugin.Settings.Abstractions;
 
 namespace AvtoNetNotifier
 {

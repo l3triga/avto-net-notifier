@@ -51,25 +51,25 @@
                     <Label Text="Znamka in model" FontSize="Medium" Grid.Row="3" Grid.Column="0" 
                        Grid.ColumnSpan="6"></Label>
                     <Picker Title="Znamka" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding Brands}" 
-                        ItemDisplayBinding="{Binding Brand}" SelectedItem="{Binding SelectedBrand}" 
+                        ItemDisplayBinding="{Binding Text}" SelectedItem="{Binding SelectedBrand}" 
                         Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"></Picker>
                     <Picker Title="Model" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding Models}" 
-                        ItemDisplayBinding="{Binding Model}" SelectedItem="{Binding SelectedModel}" 
+                        ItemDisplayBinding="{Binding Text}" SelectedItem="{Binding SelectedModel}" 
                         Grid.Row="4" Grid.Column="3" Grid.ColumnSpan="3"></Picker>
                     <!-- Cena, letnik, prevoženi km -->
                     <Label Text="Cena, letnik, prevoženi km" FontSize="Medium" Grid.Row="5" Grid.Column="0" 
                        Grid.ColumnSpan="6"></Label>
-                    <Picker Title="Cena od" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding Prices}" 
-                        ItemDisplayBinding="{Binding Value}" SelectedItem="{Binding MinPrice}" Grid.Row="6" 
+                    <Picker Title="Cena od" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding MinPrices}" 
+                        ItemDisplayBinding="{Binding Text}" SelectedItem="{Binding MinPrice}" Grid.Row="6" 
                         Grid.Column="0" Grid.ColumnSpan="3"></Picker>
-                    <Picker Title="Cena do" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding Prices}" 
-                        ItemDisplayBinding="{Binding Value}" SelectedItem="{Binding MaxPrice}" Grid.Row="6" 
+                    <Picker Title="Cena do" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding MaxPrices}" 
+                        ItemDisplayBinding="{Binding Text}" SelectedItem="{Binding MaxPrice}" Grid.Row="6" 
                         Grid.Column="3" Grid.ColumnSpan="3"></Picker>
-                    <Picker Title="Letnik od" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding Ages}" 
-                        ItemDisplayBinding="{Binding Age}" SelectedItem="{Binding MinAge}" Grid.Row="7" 
+                    <Picker Title="Letnik od" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding MinAges}" 
+                        ItemDisplayBinding="{Binding Text}" SelectedItem="{Binding MinAge}" Grid.Row="7" 
                         Grid.Column="0" Grid.ColumnSpan="3"></Picker>
-                    <Picker Title="Letnik do" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding Ages}" 
-                        ItemDisplayBinding="{Binding Age}" SelectedItem="{Binding MaxAge}" Grid.Row="7" 
+                    <Picker Title="Letnik do" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding MaxAges}" 
+                        ItemDisplayBinding="{Binding Text}" SelectedItem="{Binding MaxAge}" Grid.Row="7" 
                         Grid.Column="3" Grid.ColumnSpan="3"></Picker>
                 </Grid>
             </ScrollView>

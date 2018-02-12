@@ -4,44 +4,45 @@ using System.Text;
 
 namespace AvtoNetNotifier
 {
-    public class CarBrand : IEquatable<CarBrand>
+    public class CarBrand : CarAttribute<string>, IEquatable<CarBrand>
     {
-        public string Brand { get; set; }
-        public List<CarModel> Models { get; set; }
+        public List<CarAttribute<string>> Models { get; set; }
 
-        public CarBrand()
+        public CarBrand() : base()
         {
-            Brand = "";
-            Models = new List<CarModel>();
+            Models = new List<CarAttribute<string>>();
         }
 
-        public CarBrand (string brand)
+        public CarBrand (string value) : base(value, value)
         {
-            Brand = brand;
-            Models = new List<CarModel>();
+            Models = new List<CarAttribute<string>>();
         }
 
-        public CarBrand(string brand, List<CarModel> models)
+        public CarBrand(string value, string text) : base(value, text)
         {
-            Brand = brand;
-            Models = new List<CarModel>();
+            Models = new List<CarAttribute<string>>();
+        }
+
+        public CarBrand(string value, List<CarAttribute<string>> models) : base(value, value)
+        {
+            Models = models;
         }
 
         public bool Equals(CarBrand other)
         {
-            return this.Brand.Equals(other.Brand);
+            return Value.Equals(other.Value);
         }
 
         public class EqualityComparer : IEqualityComparer<CarBrand>
         {
             public bool Equals(CarBrand brand1, CarBrand brand2)
             {
-                return brand1.Brand.Equals(brand2.Brand);
+                return brand1.Value.Equals(brand2.Value);
             }
 
             public int GetHashCode(CarBrand brand)
             {
-                return brand.Brand.GetHashCode();
+                return brand.Value.GetHashCode();
             }
         }
     }

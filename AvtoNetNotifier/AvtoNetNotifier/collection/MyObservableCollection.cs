@@ -8,8 +8,16 @@ namespace AvtoNetNotifier
         public MyObservableCollection() : base()
         {}
 
-        public MyObservableCollection(List<T> list) : base(list)
+        public MyObservableCollection(IEnumerable<T> list) : base(list)
         {}
+
+        public void AddRange(IEnumerable<T> list)
+        {
+            foreach (var item in list)
+            {
+                Add(item);
+            }
+        }
 
         public bool TryGetValue(T inValue, out T outValue)
         {

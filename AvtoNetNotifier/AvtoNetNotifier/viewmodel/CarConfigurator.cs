@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
+using System.Linq;
 using System.ComponentModel;
 using Plugin.Settings;
 using Plugin.Settings.Abstractions;
@@ -76,7 +76,7 @@ namespace AvtoNetNotifier
                     OnPropertyChanged("SelectedBrand");
                     if (value.Models != null)
                     {
-                        Models = new MyObservableCollection<CarModel>(value.Models);
+                        Models = new MyObservableCollection<CarAttribute<string>>(value.Models);
                         OnPropertyChanged("Models");
                         OnPropertyChanged("SelectedModel");
                     }
@@ -84,63 +84,65 @@ namespace AvtoNetNotifier
             }
         }
 
-        public MyObservableCollection<CarModel> Models { get; set; }
-        public CarModel SelectedModel {
+        public MyObservableCollection<CarAttribute<string>> Models { get; set; }
+        public CarAttribute<string> SelectedModel {
             get
             {
-                return AppSetttingsSerializedDefaultGet<CarModel>(nameof(SelectedModel), Models);
+                return AppSetttingsSerializedDefaultGet<CarAttribute<string>>(nameof(SelectedModel), Models);
             }
             set
             {
-                AppSetingsSerializedDefaultSet<CarModel>(nameof(SelectedModel), value);
+                AppSetingsSerializedDefaultSet<CarAttribute<string>>(nameof(SelectedModel), value);
             }
         }
 
-        public MyObservableCollection<CarPrice> Prices { get; set; }
-        public CarPrice MinPrice
+        public MyObservableCollection<CarAttribute<uint>> MinPrices { get; set; }
+        public MyObservableCollection<CarAttribute<uint>> MaxPrices { get; set; }
+        public CarAttribute<uint> MinPrice
         {
             get
             {
-                return AppSetttingsSerializedDefaultGet<CarPrice>(nameof(MinPrice), Prices);
+                return AppSetttingsSerializedDefaultGet<CarAttribute<uint>>(nameof(MinPrice), MinPrices);
             }
             set
             {
-                AppSetingsSerializedDefaultSet<CarPrice>(nameof(MinPrice), value);
+                AppSetingsSerializedDefaultSet<CarAttribute<uint>>(nameof(MinPrice), value);
             }
         }
-        public CarPrice MaxPrice
+        public CarAttribute<uint> MaxPrice
         {
             get
             {
-                return AppSetttingsSerializedDefaultGet<CarPrice>(nameof(MaxPrice), Prices);
+                return AppSetttingsSerializedDefaultGet<CarAttribute<uint>>(nameof(MaxPrice), MaxPrices);
             }
             set
             {
-                AppSetingsSerializedDefaultSet<CarPrice>(nameof(MaxPrice), value);
+                AppSetingsSerializedDefaultSet<CarAttribute<uint>>(nameof(MaxPrice), value);
             }
         }
 
-        public MyObservableCollection<CarAge> Ages { get; set; }
-        public CarAge MinAge
+        public MyObservableCollection<CarAttribute<uint>> MinAges { get; set; }
+        public MyObservableCollection<CarAttribute<uint>> MaxAges { get; set; }
+        public CarAttribute<uint> MinAge
         {
             get
             {
-                return AppSetttingsSerializedDefaultGet<CarAge>(nameof(MinAge), Ages);
+                return AppSetttingsSerializedDefaultGet<CarAttribute<uint>>(nameof(MinAge), MinAges);
             }
             set
             {
-                AppSetingsSerializedDefaultSet<CarAge>(nameof(MinAge), value);
+                AppSetingsSerializedDefaultSet<CarAttribute<uint>>(nameof(MinAge), value);
             }
         }
-        public CarAge MaxAge
+        public CarAttribute<uint> MaxAge
         {
             get
             {
-                return AppSetttingsSerializedDefaultGet<CarAge>(nameof(MaxAge), Ages);
+                return AppSetttingsSerializedDefaultGet<CarAttribute<uint>>(nameof(MaxAge), MaxAges);
             }
             set
             {
-                AppSetingsSerializedDefaultSet<CarAge>(nameof(MaxAge), value);
+                AppSetingsSerializedDefaultSet<CarAttribute<uint>>(nameof(MaxAge), value);
             }
         }
 
@@ -149,18 +151,21 @@ namespace AvtoNetNotifier
             IsInitialized = false;
 
             Brands = new MyObservableCollection<CarBrand>();
-            Models = new MyObservableCollection<CarModel>();
-            Prices = new MyObservableCollection<CarPrice>();
-            Ages = new MyObservableCollection<CarAge>();
+            Models = new MyObservableCollection<CarAttribute<string>>();
+
+            MinPrices = new MyObservableCollection<CarAttribute<uint>>();
+            MaxPrices = new MyObservableCollection<CarAttribute<uint>>();
+
+            MinAges = new MyObservableCollection<CarAttribute<uint>>();
+            MaxAges = new MyObservableCollection<CarAttribute<uint>>();
         }
 
         private T AppSetttingsSerializedDefaultGet<T>(string property, MyObservableCollection<T> collection)
         {
             if (!IsInitialized)
                 return default(T);
-
             var obj = ObjectSerializer.Deserialize<T>(
-                AppSettings.GetValueOrDefault(property, null)
+                AppSettings.GetValueOrDefault(property, ObjectSerializer.Serialize <T>(collection.FirstOrDefault()))
             );
 
             collection.TryGetValue(obj, out T refObj);
