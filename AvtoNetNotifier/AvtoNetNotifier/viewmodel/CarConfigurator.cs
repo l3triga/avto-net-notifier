@@ -25,6 +25,10 @@ namespace AvtoNetNotifier
                 OnPropertyChanged("MaxPrice");
                 OnPropertyChanged("MinAge");
                 OnPropertyChanged("MaxAge");
+                OnPropertyChanged("MinKilometer");
+                OnPropertyChanged("MaxKilometer");
+                OnPropertyChanged("SellerType");
+                OnPropertyChanged("SellerLocation");
             }
         }
 
@@ -59,7 +63,6 @@ namespace AvtoNetNotifier
         }
 
         public MyObservableCollection<CarBrand> Brands { get; set; }
-
         public CarBrand SelectedBrand
         {
             get
@@ -97,7 +100,6 @@ namespace AvtoNetNotifier
         }
 
         public MyObservableCollection<CarAttribute<uint>> MinPrices { get; set; }
-        public MyObservableCollection<CarAttribute<uint>> MaxPrices { get; set; }
         public CarAttribute<uint> MinPrice
         {
             get
@@ -109,6 +111,8 @@ namespace AvtoNetNotifier
                 AppSetingsSerializedDefaultSet<CarAttribute<uint>>(nameof(MinPrice), value);
             }
         }
+
+        public MyObservableCollection<CarAttribute<uint>> MaxPrices { get; set; }
         public CarAttribute<uint> MaxPrice
         {
             get
@@ -122,7 +126,6 @@ namespace AvtoNetNotifier
         }
 
         public MyObservableCollection<CarAttribute<uint>> MinAges { get; set; }
-        public MyObservableCollection<CarAttribute<uint>> MaxAges { get; set; }
         public CarAttribute<uint> MinAge
         {
             get
@@ -134,6 +137,8 @@ namespace AvtoNetNotifier
                 AppSetingsSerializedDefaultSet<CarAttribute<uint>>(nameof(MinAge), value);
             }
         }
+
+        public MyObservableCollection<CarAttribute<uint>> MaxAges { get; set; }
         public CarAttribute<uint> MaxAge
         {
             get
@@ -143,6 +148,58 @@ namespace AvtoNetNotifier
             set
             {
                 AppSetingsSerializedDefaultSet<CarAttribute<uint>>(nameof(MaxAge), value);
+            }
+        }
+
+        public MyObservableCollection<CarAttribute<uint>> MinKilometers { get; set; }
+        public CarAttribute<uint> MinKilometer
+        {
+            get
+            {
+                return AppSetttingsSerializedDefaultGet<CarAttribute<uint>>(nameof(MinKilometer), MinKilometers);
+            }
+            set
+            {
+                AppSetingsSerializedDefaultSet<CarAttribute<uint>>(nameof(MinKilometer), value);
+            }
+        }
+
+        public MyObservableCollection<CarAttribute<uint>> MaxKilometers { get; set; }
+        public CarAttribute<uint> MaxKilometer
+        {
+            get
+            {
+                return AppSetttingsSerializedDefaultGet<CarAttribute<uint>>(nameof(MaxKilometer), MaxKilometers);
+            }
+            set
+            {
+                AppSetingsSerializedDefaultSet<CarAttribute<uint>>(nameof(MaxKilometer), value);
+            }
+        }
+
+        public MyObservableCollection<CarAttribute<string>> SellerTypes { get; set; }
+        public CarAttribute<string> SellerType
+        {
+            get
+            {
+                return AppSetttingsSerializedDefaultGet<CarAttribute<string>>(nameof(SellerType), SellerTypes);
+            }
+            set
+            {
+                AppSetingsSerializedDefaultSet<CarAttribute<string>>(nameof(SellerType), value);
+            }
+        }
+
+        public MyObservableCollection<CarAttribute<string>> SellerLocations { get; set; }
+        public CarAttribute<string> SellerLocation
+        {
+            get
+            {
+                return AppSetttingsSerializedDefaultGet<CarAttribute<string>>(nameof(SellerLocation), SellerLocations);
+            }
+            set
+            {
+                AppSetingsSerializedDefaultSet<CarAttribute<string>>(nameof(SellerLocation), value);
             }
         }
 
@@ -158,6 +215,12 @@ namespace AvtoNetNotifier
 
             MinAges = new MyObservableCollection<CarAttribute<uint>>();
             MaxAges = new MyObservableCollection<CarAttribute<uint>>();
+
+            MinKilometers = new MyObservableCollection<CarAttribute<uint>>();
+            MaxKilometers = new MyObservableCollection<CarAttribute<uint>>();
+
+            SellerTypes = new MyObservableCollection<CarAttribute<string>>();
+            SellerLocations = new MyObservableCollection<CarAttribute<string>>();
         }
 
         private T AppSetttingsSerializedDefaultGet<T>(string property, MyObservableCollection<T> collection)

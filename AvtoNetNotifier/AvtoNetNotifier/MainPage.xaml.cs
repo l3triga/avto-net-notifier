@@ -29,7 +29,7 @@ namespace AvtoNetNotifier
         {
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
-            bool status = await Parser.LoadSourceAsync(AvtoNetParser.SOURCE_URL, Encoding.GetEncoding(1252));
+            bool status = await Parser.LoadSourceAsync(AvtoNetParser.SOURCE_URL, Encoding.GetEncoding(1250));
             if (status)
             {
                 Parser.Parse();

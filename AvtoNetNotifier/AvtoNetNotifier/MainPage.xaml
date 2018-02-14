@@ -10,8 +10,14 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
-            <ScrollView Margin="20" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+        <AbsoluteLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="#CFD7DF">
+            <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                            AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All">
+                <Image Source="https://www.avto.net/_graphics/avtonet/logo11.png" HorizontalOptions="CenterAndExpand"
+                       VerticalOptions="CenterAndExpand" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
+                       Opacity="0.25" Rotation="-20" />
+            </AbsoluteLayout>
+            <ScrollView Padding="0, 20 ,20 ,20" Margin="20, 0, 0, 0" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
                 <Grid>
                     <Grid.RowDefinitions>
                         <!-- Starost -->
@@ -24,6 +30,9 @@
                         <!-- Cena, letnik, prevoženi km -->
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <RowDefinition Height="Auto"></RowDefinition>
+                        <!-- Prodajalec -->
                         <RowDefinition Height="Auto"></RowDefinition>
                         <RowDefinition Height="Auto"></RowDefinition>
                     </Grid.RowDefinitions>
@@ -70,6 +79,22 @@
                         Grid.Column="0" Grid.ColumnSpan="3"></Picker>
                     <Picker Title="Letnik do" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding MaxAges}" 
                         ItemDisplayBinding="{Binding Text}" SelectedItem="{Binding MaxAge}" Grid.Row="7" 
+                        Grid.Column="3" Grid.ColumnSpan="3"></Picker>
+                    <Picker Title="Prevoženih km od" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding MinKilometers}" 
+                        ItemDisplayBinding="{Binding Text}" SelectedItem="{Binding MinKilometer}" Grid.Row="8" 
+                        Grid.Column="0" Grid.ColumnSpan="3"></Picker>
+                    <Picker Title="Prevoženih km do" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding MaxKilometers}" 
+                        ItemDisplayBinding="{Binding Text}" SelectedItem="{Binding MaxKilometer}" Grid.Row="8" 
+                        Grid.Column="3" Grid.ColumnSpan="3"></Picker>
+                    <!-- Prodajalec -->
+                    <Label Text="Prodajalec" FontSize="Medium" Grid.Row="9" Grid.Column="0" 
+                       Grid.ColumnSpan="6">
+                    </Label>
+                    <Picker Title="Tip prodajalca" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding SellerTypes}" 
+                        ItemDisplayBinding="{Binding Text}" SelectedItem="{Binding SellerType}" Grid.Row="10" 
+                        Grid.Column="0" Grid.ColumnSpan="3"></Picker>
+                    <Picker Title="Lokacija prodajalca" IsEnabled="{Binding IsInitialized}" ItemsSource="{Binding SellerLocations}" 
+                        ItemDisplayBinding="{Binding Text}" SelectedItem="{Binding SellerLocation}" Grid.Row="10" 
                         Grid.Column="3" Grid.ColumnSpan="3"></Picker>
                 </Grid>
             </ScrollView>

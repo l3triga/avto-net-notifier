@@ -22,6 +22,8 @@ namespace AvtoNetNotifier
             ParseBrandsAndModels();
             ParsePrices();
             ParseAges();
+            ParseKilometers();
+            ParseSellers();
 
             CarConfigurator.IsInitialized = true;
         }
@@ -93,7 +95,25 @@ namespace AvtoNetNotifier
             CarConfigurator.MaxAges.AddRange(ParseGenericAttribute<uint>(nodesMax));
         }
 
-        private List<CarAttribute<T>> ParseGenericAttribute<T>(HtmlNodeCollection nodes) where T : new()
+        public void ParseKilometers()
+        {
+            HtmlNodeCollection nodesMin = GetSelectNodeByName("kmMIN");
+            CarConfigurator.MinKilometers.AddRange(ParseGenericAttribute<uint>(nodesMin));
+
+            HtmlNodeCollection nodesMax = GetSelectNodeByName("kmMax");
+            CarConfigurator.MaxKilometers.AddRange(ParseGenericAttribute<uint>(nodesMax));
+        }
+
+        public void ParseSellers()
+        {
+            HtmlNodeCollection nodesSeller = GetSelectNodeByName("prodajalec");
+            CarConfigurator.SellerTypes.AddRange(ParseGenericAttribute<string>(nodesSeller));
+
+            HtmlNodeCollection nodesLocation = GetSelectNodeByName("lokacija");
+            CarConfigurator.SellerLocations.AddRange(ParseGenericAttribute<string>(nodesLocation));
+        }
+
+        private List<CarAttribute<T>> ParseGenericAttribute<T>(HtmlNodeCollection nodes)
         {
             List<CarAttribute<T>> collection = new List<CarAttribute<T>>();
             foreach (var node in nodes)
