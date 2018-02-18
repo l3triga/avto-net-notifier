@@ -32,6 +32,17 @@ namespace AvtoNetNotifier
             }
         }
 
+        private string _initializationStatus;
+        public string InitializationStatus {
+            get {
+                return _initializationStatus;
+            }
+            set {
+                _initializationStatus = value;
+                OnPropertyChanged("InitializationStatus");
+            }
+        }
+
         public bool New
         {
             get {

@@ -8,6 +8,7 @@ namespace AvtoNetNotifier
 {
     class AvtoNetParser : WebParser
     {
+        public static readonly string DOMAIN = "avto.net";
         public static readonly string SOURCE_URL = "https://www.avto.net/Ads/search.asp?SID=10000";
 
         public CarConfigurator CarConfigurator { get; }

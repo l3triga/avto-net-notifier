@@ -102,12 +102,13 @@
                             AbsoluteLayout.LayoutBounds="0,0,1,1" AbsoluteLayout.LayoutFlags="All"
                         IsVisible="{Binding Path=IsInitialized, Converter={StaticResource inverseBool}}" 
                             BackgroundColor="Black" Opacity="0.75">
-                <ActivityIndicator IsRunning="{Binding Path=IsInitialized, Converter={StaticResource inverseBool}}" 
-                                   IsVisible="{Binding Path=IsInitialized, Converter={StaticResource inverseBool}}" 
-                                   Color="White" VerticalOptions="CenterAndExpand" 
-                               HorizontalOptions="CenterAndExpand" 
-                                   AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1"
-                               HeightRequest="20" WidthRequest="50" />
+                <StackLayout VerticalOptions="CenterAndExpand" 
+                               HorizontalOptions="CenterAndExpand" AbsoluteLayout.LayoutFlags="All" 
+                             AbsoluteLayout.LayoutBounds="0,0,1,1">
+                    <ActivityIndicator IsRunning="{Binding Path=IsInitialized, Converter={StaticResource inverseBool}}" 
+                                   Color="White" HeightRequest="20" WidthRequest="50" />
+                    <Label Text="{Binding InitializationStatus}" FontSize="Default" TextColor="White"></Label>
+                </StackLayout>
             </AbsoluteLayout>
         </AbsoluteLayout>
     </ContentPage.Content>
