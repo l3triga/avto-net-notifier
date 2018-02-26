@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Text;
 using HtmlAgilityPack;
 using System.Linq;
+using AvtoNetLibrary.Parser;
+using AvtoNetLibrary.Model;
 
 namespace AvtoNetNotifier
 {
-    class AvtoNetParser : WebParser
+    class AvtoNetViewModelParser : WebParser
     {
         public static readonly string DOMAIN = "avto.net";
         public static readonly string SOURCE_URL = "https://www.avto.net/Ads/search.asp?SID=10000";
 
         public CarConfigurator CarConfigurator { get; }
 
-        public AvtoNetParser()
+        public AvtoNetViewModelParser()
         {
             CarConfigurator = new CarConfigurator();
         }

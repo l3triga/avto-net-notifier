@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using AvtoNetLibrary.Model;
 
-namespace AvtoNetNotifier
+namespace AvtoNetLibrary.Model
 {
     public class CarBrand : CarAttribute<string>, IEquatable<CarBrand>
     {

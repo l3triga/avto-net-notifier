@@ -96,6 +96,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AvtoNetTaskRegister.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -154,12 +155,20 @@
     <PackageReference Include="Xam.Plugins.Settings">
       <Version>3.1.1</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="2.5.0.122203" />
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.0.1" />
+    <PackageReference Include="Xamarin.Forms" Version="2.5.0.280555" />
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.0.7" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\AvtoNetLibrary\AvtoNetLibrary.csproj">
+      <Project>{f2dba58d-3cb4-46bd-8b40-047e9fa70611}</Project>
+      <Name>AvtoNetLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Component.UWP\Component.UWP.csproj">
+      <Project>{bb9c650c-6440-4994-9513-568a155e4ee3}</Project>
+      <Name>Component.UWP</Name>
+    </ProjectReference>
     <ProjectReference Include="..\AvtoNetNotifier\AvtoNetNotifier.csproj">
-      <Project>{6A0FA8A7-4142-4D3F-B4A6-A0B5DE75AA91}</Project>
+      <Project>{8ae19301-4797-4cf0-bc4d-ee46244a6d69}</Project>
       <Name>AvtoNetNotifier</Name>
     </ProjectReference>
   </ItemGroup>

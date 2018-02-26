@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 using System.Net;
 using HtmlAgilityPack;
 
-namespace AvtoNetNotifier
+namespace AvtoNetLibrary.Parser
 {
-    abstract class WebParser
+    public abstract class WebParser
     {
         protected HtmlDocument document;
 

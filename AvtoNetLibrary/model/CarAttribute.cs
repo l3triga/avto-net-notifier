@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AvtoNetNotifier
+namespace AvtoNetLibrary.Model
 {
     public class CarAttribute<T> : IEquatable<CarAttribute<T>>
     {

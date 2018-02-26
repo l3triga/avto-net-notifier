@@ -2,9 +2,9 @@
 using System.IO;
 using System.Xml.Serialization;
 
-namespace AvtoNetNotifier
+namespace AvtoNetLibrary.Serializer
 {
-    static class ObjectSerializer
+    public static class ObjectSerializer
     {
         public static string Serialize<T>(T obj)
         {
@@ -25,11 +25,18 @@ namespace AvtoNetNotifier
             if (String.IsNullOrEmpty(serialized))
                 return default(T);
 
-            XmlSerializer serializer = new XmlSerializer(typeof(T));
-
-            using (StringReader reader = new StringReader(serialized))
+            try
             {
-                return (T)serializer.Deserialize(reader);
+                XmlSerializer serializer = new XmlSerializer(typeof(T));
+
+                using (StringReader reader = new StringReader(serialized))
+                {
+                    return (T)serializer.Deserialize(reader);
+                }
+            }
+            catch (InvalidOperationException)
+            {
+                return default(T);
             }
         }
     }

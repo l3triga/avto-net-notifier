@@ -7,7 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvtoNetNotifier.Android", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvtoNetNotifier.UWP", "AvtoNetNotifier\AvtoNetNotifier.UWP\AvtoNetNotifier.UWP.csproj", "{364324EA-BE90-4DC1-96BE-16855ECF84F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvtoNetNotifier", "AvtoNetNotifier\AvtoNetNotifier\AvtoNetNotifier.csproj", "{8AE19301-4797-4CF0-BC4D-EE46244A6D69}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AvtoNetNotifier", "AvtoNetNotifier\AvtoNetNotifier\AvtoNetNotifier.csproj", "{8AE19301-4797-4CF0-BC4D-EE46244A6D69}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Component.UWP", "Component.UWP\Component.UWP.csproj", "{BB9C650C-6440-4994-9513-568A155E4EE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvtoNetLibrary", "AvtoNetLibrary\AvtoNetLibrary.csproj", "{F2DBA58D-3CB4-46BD-8B40-047E9FA70611}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -81,6 +85,38 @@ Global
 		{8AE19301-4797-4CF0-BC4D-EE46244A6D69}.Release|x64.Build.0 = Release|Any CPU
 		{8AE19301-4797-4CF0-BC4D-EE46244A6D69}.Release|x86.ActiveCfg = Release|Any CPU
 		{8AE19301-4797-4CF0-BC4D-EE46244A6D69}.Release|x86.Build.0 = Release|Any CPU
+		{BB9C650C-6440-4994-9513-568A155E4EE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB9C650C-6440-4994-9513-568A155E4EE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB9C650C-6440-4994-9513-568A155E4EE3}.Debug|ARM.ActiveCfg = Debug|ARM
+		{BB9C650C-6440-4994-9513-568A155E4EE3}.Debug|ARM.Build.0 = Debug|ARM
+		{BB9C650C-6440-4994-9513-568A155E4EE3}.Debug|x64.ActiveCfg = Debug|x64
+		{BB9C650C-6440-4994-9513-568A155E4EE3}.Debug|x64.Build.0 = Debug|x64
+		{BB9C650C-6440-4994-9513-568A155E4EE3}.Debug|x86.ActiveCfg = Debug|x86
+		{BB9C650C-6440-4994-9513-568A155E4EE3}.Debug|x86.Build.0 = Debug|x86
+		{BB9C650C-6440-4994-9513-568A155E4EE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB9C650C-6440-4994-9513-568A155E4EE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB9C650C-6440-4994-9513-568A155E4EE3}.Release|ARM.ActiveCfg = Release|ARM
+		{BB9C650C-6440-4994-9513-568A155E4EE3}.Release|ARM.Build.0 = Release|ARM
+		{BB9C650C-6440-4994-9513-568A155E4EE3}.Release|x64.ActiveCfg = Release|x64
+		{BB9C650C-6440-4994-9513-568A155E4EE3}.Release|x64.Build.0 = Release|x64
+		{BB9C650C-6440-4994-9513-568A155E4EE3}.Release|x86.ActiveCfg = Release|x86
+		{BB9C650C-6440-4994-9513-568A155E4EE3}.Release|x86.Build.0 = Release|x86
+		{F2DBA58D-3CB4-46BD-8B40-047E9FA70611}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2DBA58D-3CB4-46BD-8B40-047E9FA70611}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2DBA58D-3CB4-46BD-8B40-047E9FA70611}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{F2DBA58D-3CB4-46BD-8B40-047E9FA70611}.Debug|ARM.Build.0 = Debug|Any CPU
+		{F2DBA58D-3CB4-46BD-8B40-047E9FA70611}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F2DBA58D-3CB4-46BD-8B40-047E9FA70611}.Debug|x64.Build.0 = Debug|Any CPU
+		{F2DBA58D-3CB4-46BD-8B40-047E9FA70611}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{F2DBA58D-3CB4-46BD-8B40-047E9FA70611}.Debug|x86.Build.0 = Debug|Any CPU
+		{F2DBA58D-3CB4-46BD-8B40-047E9FA70611}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2DBA58D-3CB4-46BD-8B40-047E9FA70611}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2DBA58D-3CB4-46BD-8B40-047E9FA70611}.Release|ARM.ActiveCfg = Release|Any CPU
+		{F2DBA58D-3CB4-46BD-8B40-047E9FA70611}.Release|ARM.Build.0 = Release|Any CPU
+		{F2DBA58D-3CB4-46BD-8B40-047E9FA70611}.Release|x64.ActiveCfg = Release|Any CPU
+		{F2DBA58D-3CB4-46BD-8B40-047E9FA70611}.Release|x64.Build.0 = Release|Any CPU
+		{F2DBA58D-3CB4-46BD-8B40-047E9FA70611}.Release|x86.ActiveCfg = Release|Any CPU
+		{F2DBA58D-3CB4-46BD-8B40-047E9FA70611}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

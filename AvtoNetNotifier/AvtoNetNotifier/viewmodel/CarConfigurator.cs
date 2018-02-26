@@ -5,6 +5,8 @@ using System.Linq;
 using System.ComponentModel;
 using Plugin.Settings;
 using Plugin.Settings.Abstractions;
+using AvtoNetLibrary.Serializer;
+using AvtoNetLibrary.Model;
 
 namespace AvtoNetNotifier
 {
@@ -46,30 +48,30 @@ namespace AvtoNetNotifier
         public bool New
         {
             get {
-                return AppSettings.GetValueOrDefault(nameof(New), true);
+                return AppSettings.GetValueOrDefault("star1", true);
             }
             set {
-                AppSettings.AddOrUpdateValue(nameof(New), value);
+                AppSettings.AddOrUpdateValue("star1", value);
             }
         }
 
         public bool Test
         {
             get {
-                return AppSettings.GetValueOrDefault(nameof(Test), true);
+                return AppSettings.GetValueOrDefault("star2", true);
             }
             set {
-                AppSettings.AddOrUpdateValue(nameof(Test), value);
+                AppSettings.AddOrUpdateValue("star2", value);
             }
         }
 
         public bool Used
         {
             get {
-                return AppSettings.GetValueOrDefault(nameof(Used), true);
+                return AppSettings.GetValueOrDefault("star4", true);
             }
             set {
-                AppSettings.AddOrUpdateValue(nameof(Used), value);
+                AppSettings.AddOrUpdateValue("star4", value);
             }
         }
 
@@ -78,13 +80,13 @@ namespace AvtoNetNotifier
         {
             get
             {
-                return AppSetttingsSerializedDefaultGet<CarBrand>(nameof(SelectedBrand), Brands);
+                return AppSetttingsSerializedDefaultGet<CarBrand>("znamka", Brands);
             }
             set
             {
                 if (IsInitialized)
                 {
-                    AppSettings.AddOrUpdateValue(nameof(SelectedBrand),
+                    AppSettings.AddOrUpdateValue("znamka",
                         ObjectSerializer.Serialize<CarBrand>(value)
                     );
                     OnPropertyChanged("SelectedBrand");
@@ -102,11 +104,11 @@ namespace AvtoNetNotifier
         public CarAttribute<string> SelectedModel {
             get
             {
-                return AppSetttingsSerializedDefaultGet<CarAttribute<string>>(nameof(SelectedModel), Models);
+                return AppSetttingsSerializedDefaultGet<CarAttribute<string>>("model", Models);
             }
             set
             {
-                AppSetingsSerializedDefaultSet<CarAttribute<string>>(nameof(SelectedModel), value);
+                AppSetingsSerializedDefaultSet<CarAttribute<string>>("model", value);
             }
         }
 
@@ -115,11 +117,11 @@ namespace AvtoNetNotifier
         {
             get
             {
-                return AppSetttingsSerializedDefaultGet<CarAttribute<uint>>(nameof(MinPrice), MinPrices);
+                return AppSetttingsSerializedDefaultGet<CarAttribute<uint>>("cenaMin", MinPrices);
             }
             set
             {
-                AppSetingsSerializedDefaultSet<CarAttribute<uint>>(nameof(MinPrice), value);
+                AppSetingsSerializedDefaultSet<CarAttribute<uint>>("cenaMin", value);
             }
         }
 
@@ -128,11 +130,11 @@ namespace AvtoNetNotifier
         {
             get
             {
-                return AppSetttingsSerializedDefaultGet<CarAttribute<uint>>(nameof(MaxPrice), MaxPrices);
+                return AppSetttingsSerializedDefaultGet<CarAttribute<uint>>("cenaMax", MaxPrices);
             }
             set
             {
-                AppSetingsSerializedDefaultSet<CarAttribute<uint>>(nameof(MaxPrice), value);
+                AppSetingsSerializedDefaultSet<CarAttribute<uint>>("cenaMax", value);
             }
         }
 
@@ -141,11 +143,11 @@ namespace AvtoNetNotifier
         {
             get
             {
-                return AppSetttingsSerializedDefaultGet<CarAttribute<uint>>(nameof(MinAge), MinAges);
+                return AppSetttingsSerializedDefaultGet<CarAttribute<uint>>("letnikMin", MinAges);
             }
             set
             {
-                AppSetingsSerializedDefaultSet<CarAttribute<uint>>(nameof(MinAge), value);
+                AppSetingsSerializedDefaultSet<CarAttribute<uint>>("letnikMin", value);
             }
         }
 
@@ -154,11 +156,11 @@ namespace AvtoNetNotifier
         {
             get
             {
-                return AppSetttingsSerializedDefaultGet<CarAttribute<uint>>(nameof(MaxAge), MaxAges);
+                return AppSetttingsSerializedDefaultGet<CarAttribute<uint>>("letnikMax", MaxAges);
             }
             set
             {
-                AppSetingsSerializedDefaultSet<CarAttribute<uint>>(nameof(MaxAge), value);
+                AppSetingsSerializedDefaultSet<CarAttribute<uint>>("letnikMax", value);
             }
         }
 
@@ -167,11 +169,11 @@ namespace AvtoNetNotifier
         {
             get
             {
-                return AppSetttingsSerializedDefaultGet<CarAttribute<uint>>(nameof(MinKilometer), MinKilometers);
+                return AppSetttingsSerializedDefaultGet<CarAttribute<uint>>("kmMIN", MinKilometers);
             }
             set
             {
-                AppSetingsSerializedDefaultSet<CarAttribute<uint>>(nameof(MinKilometer), value);
+                AppSetingsSerializedDefaultSet<CarAttribute<uint>>("kmMIN", value);
             }
         }
 
@@ -180,11 +182,11 @@ namespace AvtoNetNotifier
         {
             get
             {
-                return AppSetttingsSerializedDefaultGet<CarAttribute<uint>>(nameof(MaxKilometer), MaxKilometers);
+                return AppSetttingsSerializedDefaultGet<CarAttribute<uint>>("kmMax", MaxKilometers);
             }
             set
             {
-                AppSetingsSerializedDefaultSet<CarAttribute<uint>>(nameof(MaxKilometer), value);
+                AppSetingsSerializedDefaultSet<CarAttribute<uint>>("kmMax", value);
             }
         }
 
@@ -193,11 +195,11 @@ namespace AvtoNetNotifier
         {
             get
             {
-                return AppSetttingsSerializedDefaultGet<CarAttribute<string>>(nameof(SellerType), SellerTypes);
+                return AppSetttingsSerializedDefaultGet<CarAttribute<string>>("prodajalec", SellerTypes);
             }
             set
             {
-                AppSetingsSerializedDefaultSet<CarAttribute<string>>(nameof(SellerType), value);
+                AppSetingsSerializedDefaultSet<CarAttribute<string>>("prodajalec", value);
             }
         }
 
@@ -206,11 +208,11 @@ namespace AvtoNetNotifier
         {
             get
             {
-                return AppSetttingsSerializedDefaultGet<CarAttribute<string>>(nameof(SellerLocation), SellerLocations);
+                return AppSetttingsSerializedDefaultGet<CarAttribute<string>>("lokacija", SellerLocations);
             }
             set
             {
-                AppSetingsSerializedDefaultSet<CarAttribute<string>>(nameof(SellerLocation), value);
+                AppSetingsSerializedDefaultSet<CarAttribute<string>>("lokacija", value);
             }
         }
 
