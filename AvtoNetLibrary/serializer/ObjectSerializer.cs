@@ -12,7 +12,6 @@ namespace AvtoNetLibrary.Serializer
                 return String.Empty;
 
             XmlSerializer serializer = new XmlSerializer(typeof(T));
-
             using (StringWriter writer = new StringWriter())
             {
                 serializer.Serialize(writer, obj);
@@ -28,7 +27,6 @@ namespace AvtoNetLibrary.Serializer
             try
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(T));
-
                 using (StringReader reader = new StringReader(serialized))
                 {
                     return (T)serializer.Deserialize(reader);
