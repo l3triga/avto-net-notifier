@@ -9,7 +9,9 @@ namespace AvtoNetNotifier
 {
 	public partial class MainPage : ContentPage
 	{
+        private const string CONNECTIVITY_DOMAIN = "avto.net";
         private IConnectivity Connectivity;
+
         private AvtoNetViewModelParser Parser;
 
 		public MainPage()
@@ -42,7 +44,7 @@ namespace AvtoNetNotifier
             if (!Connectivity.IsConnected)
                 return false;
 
-            var reachable = await Connectivity.IsRemoteReachable(AvtoNetViewModelParser.DOMAIN);
+            var reachable = await Connectivity.IsRemoteReachable(CONNECTIVITY_DOMAIN);
             return reachable;
         }
 
@@ -51,7 +53,7 @@ namespace AvtoNetNotifier
             Parser.CarConfigurator.InitializationStatus = "Nalaganje podatkov...";
 
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            bool status = await Parser.LoadSourceAsync(AvtoNetViewModelParser.SOURCE_URL, Encoding.GetEncoding(1250));
+            bool status = await Parser.LoadSourceAsync(Encoding.GetEncoding(1250));
 
             if (status)
                 Parser.Parse();

@@ -9,6 +9,8 @@ namespace AvtoNetLibrary.Parser
 {
     public abstract class WebParser
     {
+        public abstract string SourceURL { get; }
+
         protected HtmlDocument document;
 
         public WebParser()
@@ -16,10 +18,10 @@ namespace AvtoNetLibrary.Parser
             document = new HtmlDocument();
         }
 
-        public async Task<bool> LoadSourceAsync(string URL, Encoding encoding)
+        public async Task<bool> LoadSourceAsync(Encoding encoding)
         {
             WebClient webClient = new WebClient();
-            var data = await webClient.DownloadDataTaskAsync(new Uri(URL));
+            var data = await webClient.DownloadDataTaskAsync(new Uri(SourceURL));
             var html = encoding.GetString(data);
 
             document.LoadHtml(html);

@@ -74,6 +74,7 @@ namespace AvtoNetLibrary.Web
             }
 
             QueryCollection.Add("EQ7", Convert.ToString(EQ7Initial, 2) + "0100120");
+            QueryCollection.Add("stran", "1");
         }
 
         public override string ToString()
