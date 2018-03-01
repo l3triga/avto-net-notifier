@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using AvtoNetLibrary.Model;
+using HtmlAgilityPack;
+using AvtoNetLibrary.Constants;
 
 namespace AvtoNetLibrary.Parser
 {
@@ -10,7 +13,7 @@ namespace AvtoNetLibrary.Parser
         {
             get
             {
-                return "https://www.avto.net/Ads/results.asp?" + QueryString;
+                return DomainConstants.ResultURL + "?" + QueryString;
             }
         }
 
@@ -31,12 +34,33 @@ namespace AvtoNetLibrary.Parser
 
         public override void Parse()
         {
-            throw new NotImplementedException();
-        }
+            Regex idRegex = new Regex(@"/(\d+)/");
+            Regex priceRegex = new Regex(@"\s+");
 
-        public CarSummary ParseNext()
-        {
-            throw new NotImplementedException();
+            HtmlNodeCollection resultNodes = document.DocumentNode.SelectNodes("//div[@class='ResultsAd']");
+            foreach (var node in resultNodes)
+            {
+                CarSummary summary = new CarSummary();
+
+                HtmlNode linkNode = node.SelectSingleNode("//div[@class='ResultsAdData']/a[@class='Adlink']");
+                summary.URL = linkNode.Attributes["href"].Value.Replace("..", DomainConstants.FullHostname);
+                summary.Name = linkNode.ChildNodes[1].InnerText;
+
+                HtmlNodeCollection listNodes = node.SelectNodes("//div[@class='ResultsAdData']/ul/li");
+                summary.RegistrationDate = listNodes[0].InnerText;
+                summary.Kilometers = listNodes[1].InnerText;
+                summary.Engine = listNodes[2].InnerText;
+                summary.Transmission = listNodes[3].InnerText;
+
+                summary.ImageSource = ParseAttribute(node, "//div[@class='ResultsAdPhotoTop']//img", "src");
+                Match regexMatch = idRegex.Match(summary.ImageSource);
+                if(regexMatch.Groups.Count == 2)
+                    summary.ID = Convert.ToUInt32(regexMatch.Groups[1].Value);
+
+                summary.Price = priceRegex.Replace(ParseText(node, "//div[@class='ResultsAdPrice']"), String.Empty);
+  
+                CarOffers.Add(summary);
+            }
         }
     }
 }

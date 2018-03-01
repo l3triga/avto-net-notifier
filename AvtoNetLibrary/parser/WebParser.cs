@@ -30,5 +30,15 @@ namespace AvtoNetLibrary.Parser
         }
 
         abstract public void Parse();
+
+        protected string ParseText(HtmlNode node, string xPath)
+        {
+            return node.SelectSingleNode(xPath).InnerText;
+        }
+
+        protected string ParseAttribute(HtmlNode node, string xPath, string attributeName)
+        {
+            return node.SelectSingleNode(xPath).Attributes[attributeName].Value;
+        }
     }
 }

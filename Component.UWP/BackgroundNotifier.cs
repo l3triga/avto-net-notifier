@@ -22,21 +22,27 @@ namespace Component.UWP
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
             _deferral = taskInstance.GetDeferral();
-            Parser = new AvtoNetSearchParser();
+
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             ApplicationDataContainer settings = ApplicationData.Current.LocalSettings;
             var queryStringBuilder = new QueryStringBuilder(settings.Values);
             queryStringBuilder.Build();
 
-            Parser.QueryString = queryStringBuilder.ToString();
-
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            bool status = await Parser.LoadSourceAsync(Encoding.GetEncoding(1250));
-            if (status)
+            Parser = new AvtoNetSearchParser
             {
-                //Parser.Parse();
-                //GenerateToastNotification();
-            }
+                QueryString = queryStringBuilder.ToString()
+            };
+
+            do
+            {
+                bool status = await Parser.LoadSourceAsync(Encoding.GetEncoding(1250));
+                if (status)
+                {
+                    Parser.Parse();
+                    //GenerateToastNotification();
+                }
+            } while (1 == 2);
 
             _deferral.Complete();
         }

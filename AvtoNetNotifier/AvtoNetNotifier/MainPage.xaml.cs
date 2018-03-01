@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Plugin.Connectivity;
 using Plugin.Connectivity.Abstractions;
+using AvtoNetLibrary.Constants;
 
 namespace AvtoNetNotifier
 {
 	public partial class MainPage : ContentPage
 	{
-        private const string CONNECTIVITY_DOMAIN = "avto.net";
         private IConnectivity Connectivity;
 
         private AvtoNetViewModelParser Parser;
@@ -44,7 +44,7 @@ namespace AvtoNetNotifier
             if (!Connectivity.IsConnected)
                 return false;
 
-            var reachable = await Connectivity.IsRemoteReachable(CONNECTIVITY_DOMAIN);
+            var reachable = await Connectivity.IsRemoteReachable(DomainConstants.Host);
             return reachable;
         }
 

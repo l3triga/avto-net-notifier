@@ -5,6 +5,7 @@ using HtmlAgilityPack;
 using System.Linq;
 using AvtoNetLibrary.Parser;
 using AvtoNetLibrary.Model;
+using AvtoNetLibrary.Constants;
 
 namespace AvtoNetNotifier
 {
@@ -12,7 +13,7 @@ namespace AvtoNetNotifier
     {
         public override string SourceURL {
             get {
-                return "https://www.avto.net/Ads/search.asp?SID=10000";
+                return DomainConstants.FilterURL;
             }
         }
 

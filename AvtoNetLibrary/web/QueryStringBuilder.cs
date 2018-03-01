@@ -11,18 +11,31 @@ namespace AvtoNetLibrary.Web
     public class QueryStringBuilder
     {
         public IDictionary<string, object> QueryDictionary { get; set; }
+        public uint Page { get; set; }
 
         private NameValueCollection QueryCollection;
 
         public QueryStringBuilder()
         {
             QueryDictionary = new Dictionary<string, object>();
+            Page = 1;
+
             QueryCollection = new NameValueCollection();
         }
 
         public QueryStringBuilder(IDictionary<string, object> dictionary)
         {
             QueryDictionary = dictionary;
+            Page = 1;
+
+            QueryCollection = new NameValueCollection();
+        }
+
+        public QueryStringBuilder(IDictionary<string, object> dictionary, uint page)
+        {
+            QueryDictionary = dictionary;
+            Page = page;
+
             QueryCollection = new NameValueCollection();
         }
 
@@ -74,7 +87,7 @@ namespace AvtoNetLibrary.Web
             }
 
             QueryCollection.Add("EQ7", Convert.ToString(EQ7Initial, 2) + "0100120");
-            QueryCollection.Add("stran", "1");
+            QueryCollection.Add("stran", Page.ToString());
         }
 
         public override string ToString()
